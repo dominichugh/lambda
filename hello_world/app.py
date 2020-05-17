@@ -33,10 +33,25 @@ def lambda_handler(event, context):
 
     #     raise e
 
+    # request = json.dumps(event)
+    # output = json.loads(request)
+
+    print('\nEvent:')
+    print(event)
+
+    print('\nQuery params:')
+    print(event['queryStringParameters'])
+
+    print('\nQuery param foo:')
+    print(event['queryStringParameters']['foo'])
+
+    # print('\nOutput:')
+    # print(output)
+
     return {
         "statusCode": 200,
         "body": json.dumps({
-            "message": "hello world",
+            "message": "hello {name}".format(name=event['queryStringParameters']['foo']),
             # "location": ip.text.replace("\n", "")
         }),
     }
